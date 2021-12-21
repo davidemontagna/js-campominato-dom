@@ -9,8 +9,9 @@ Quando l’utente clicca su ogni cella, la cella cliccata si colora di azzurro. 
 
 
 let grid = document.getElementById("dm_grid");  //inserisco il div della griglia in una variabile
-
 const start = document.getElementById("dm_start");
+
+
 
 //al click sul bottone "Inizia" creo una funzione che faccia apparire la griglia
 start.addEventListener("click", function(){
@@ -21,6 +22,9 @@ start.addEventListener("click", function(){
     const bombPositions = [];
     let loseText = document.getElementById("dm_lose_txt");
     loseText.classList.add("dm_off");
+    let winText = document.getElementById("dm_win_txt");
+    winText.classList.add("dm_off");
+    
         
     /*a seconda del valore inserito genero un tot di caselle e le inserisco
       sotto forma di un div utilizzando un ciclo for*/
@@ -47,7 +51,7 @@ start.addEventListener("click", function(){
         //console.log("nuova bomba" + newbomb)
         if(bombPositions.includes(newbomb) == false){
             bombPositions.push(newbomb);
-            //console.log("bomba inserita" + newbomb);           
+            console.log("bomba inserita " + newbomb);           
         }            
     }
 
@@ -65,26 +69,34 @@ start.addEventListener("click", function(){
         /*al click controllo se il numero della casella è all'interno del mio array delle bombe
         e se lo è la casella diventa di colore rosso, altrimento di colore azzurro*/
         let color = document.getElementsByClassName("dm_box");
-        let lose = false;
+        let lose = false;        
+        let countClicks = 0;
         for(let i=0; i<color.length; i++){
             color[i].addEventListener("click", function(){
+                countClicks += 1;
                 if(!lose){
                     let mySelect = parseInt(this.innerHTML);  //recupero il valore dal div e lo trasformo in numero
                     if(bombPositions.includes(mySelect)){  //se l'array include il numero cliccato
+
+                        //ciclo for per far comparire tutte le bombe contemporaneamente
                         for(let j=0; j<bombPositions.length; j++){
 
-                            let bomb = document.getElementsByClassName("dm_"+bombPositions[j])[0];
-                            console.log(bomb.classList);
-                            bomb.classList.add("dm_bomb");                            
+                            let bomb = document.getElementsByClassName("dm_"+bombPositions[j])[0];                            
+                            bomb.classList.add("dm_bomb");                                                        
                         }                        
                         lose = true;
+                        //attivo il testo che comunica all'utente di aver perso
                         let loseText = document.getElementById("dm_lose_txt");
                         loseText.classList.remove("dm_off");
-                        
-                        
+                        loseText.append("Hai effettuato " + countClicks + " click.");                       
+                    }else if(countClicks == numBoxes-16){
+                        let winText = document.getElementById("dm_win_txt");
+                        winText.classList.remove("dm_off");
+                        winText.append("Hai effettuato " + countClicks + " click.");
+                        //this.classList.add("dm_bg_color");
                     }else{
                         this.classList.add("dm_bg_color");
-                    }
+                    }                   
                 }
             });
         }  
