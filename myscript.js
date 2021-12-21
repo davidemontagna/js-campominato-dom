@@ -19,7 +19,9 @@ start.addEventListener("click", function(){
     grid.innerHTML = ""; //elimino la griglia per poterne creare una nuova senza aggiungerla alla precedente
     let numBoxes = 0;
     const bombPositions = [];
-    
+    let loseText = document.getElementById("dm_lose_txt");
+    loseText.classList.add("dm_off");
+        
     /*a seconda del valore inserito genero un tot di caselle e le inserisco
       sotto forma di un div utilizzando un ciclo for*/
     if(choose == "easy"){
@@ -71,11 +73,15 @@ start.addEventListener("click", function(){
                     if(bombPositions.includes(mySelect)){  //se l'array include il numero cliccato
                         for(let j=0; j<bombPositions.length; j++){
 
-                            let bomb = document.getElementsByClassName("dm_"+bombPositions[j]);
+                            let bomb = document.getElementsByClassName("dm_"+bombPositions[j])[0];
                             console.log(bomb.classList);
-                            bomb.classList.add("dm_bomb");
+                            bomb.classList.add("dm_bomb");                            
                         }                        
                         lose = true;
+                        let loseText = document.getElementById("dm_lose_txt");
+                        loseText.classList.remove("dm_off");
+                        
+                        
                     }else{
                         this.classList.add("dm_bg_color");
                     }
