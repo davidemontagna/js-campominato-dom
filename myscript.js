@@ -51,7 +51,7 @@ start.addEventListener("click", function(){
         //console.log("nuova bomba" + newbomb)
         if(bombPositions.includes(newbomb) == false){
             bombPositions.push(newbomb);
-            console.log("bomba inserita " + newbomb);           
+            //console.log("bomba inserita " + newbomb);           
         }            
     }
 
@@ -70,10 +70,10 @@ start.addEventListener("click", function(){
         e se lo è la casella diventa di colore rosso, altrimento di colore azzurro*/
         let color = document.getElementsByClassName("dm_box");
         let lose = false;        
-        let countClicks = 0;
+        let countClicks = 0;  //dichiaro la variabile che andrà a contare il numero di click
         for(let i=0; i<color.length; i++){
             color[i].addEventListener("click", function(){
-                countClicks += 1;
+                countClicks += 1;  //contatore di click
                 if(!lose){
                     let mySelect = parseInt(this.innerHTML);  //recupero il valore dal div e lo trasformo in numero
                     if(bombPositions.includes(mySelect)){  //se l'array include il numero cliccato
@@ -88,12 +88,12 @@ start.addEventListener("click", function(){
                         //attivo il testo che comunica all'utente di aver perso
                         let loseText = document.getElementById("dm_lose_txt");
                         loseText.classList.remove("dm_off");
-                        loseText.append("Hai effettuato " + countClicks + " click.");                       
+                        loseText.append("Hai effettuato " + countClicks + " click."); //inserisco il testo per comunicare il numero di click                       
                     }else if(countClicks == numBoxes-16){
                         let winText = document.getElementById("dm_win_txt");
                         winText.classList.remove("dm_off");
-                        winText.append("Hai effettuato " + countClicks + " click.");
-                        //this.classList.add("dm_bg_color");
+                        winText.append("Hai effettuato " + countClicks + " click."); //inserisco il testo per comunicare il numero di click
+                        
                     }else{
                         this.classList.add("dm_bg_color");
                     }                   
