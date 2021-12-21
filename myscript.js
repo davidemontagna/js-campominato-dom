@@ -18,62 +18,73 @@ start.addEventListener("click", function(){
     const choose = document.getElementById("mySelect").value;
     grid.innerHTML = ""; //elimino la griglia per poterne creare una nuova senza aggiungerla alla precedente
     let numBoxes = 0;
-
+    const bombPositions = [];
+    
     /*a seconda del valore inserito genero un tot di caselle e le inserisco
       sotto forma di un div utilizzando un ciclo for*/
     if(choose == "easy"){
         numBoxes = 10 * 10;
-        //creo un ciclo per aggiungere le caselle
-        for(let i=1; i<=numBoxes; i++){
-            document.getElementById("dm_grid").innerHTML += `<div class='dm_box'>${i}</div>`;
-            grid.classList.add("dm_big_box_easy");  //aggiungo la dimensione alla griglia scelta
-            grid.classList.remove("dm_big_box_medium"); //tolgo la dimensione della griglia precedente
-            grid.classList.remove("dm_big_box_hard");
-        }
-
-        //al click aggiungo la classe per far diventare il bg della casella azzurro
-        let color = document.getElementsByClassName("dm_box");
-
-        for(let i=0; i<color.length; i++){
-            color[i].addEventListener("click", function(){
-            this.classList.add("dm_bg_color");
-            });
-        }
-
+            
+        boxes(numBoxes, "dm_big_box_easy");
+      
     }else if(choose == "medium"){
         numBoxes = 9 * 9;
-        for(let i=1; i<=numBoxes; i++){
-            document.getElementById("dm_grid").innerHTML += `<div class='dm_box'>${i}</div>`;
-            grid.classList.add("dm_big_box_medium");
-            grid.classList.remove("dm_big_box_easy");
-            grid.classList.remove("dm_big_box_hard");
-        }
-
-        //al click aggiungo la classe per far diventare il bg della casella azzurro
-        let color = document.getElementsByClassName("dm_box");
-        for(let i=0; i<color.length; i++){
-            color[i].addEventListener("click", function(){
-            this.classList.add("dm_bg_color");
-            });
-        }
+        
+        boxes(numBoxes, "dm_big_box_medium");
 
     }else{
         numBoxes = 7 * 7;
-        for(let i=1; i<=numBoxes; i++){
-            document.getElementById("dm_grid").innerHTML += `<div class='dm_box'>${i}</div>`;
-            grid.classList.add("dm_big_box_hard");
-            
-        }
+        
+        boxes(numBoxes, "dm_big_box_hard");
+    }
+    //console.log(numBoxes);
+    
+    //creo un ciclo while per generare 16 bombe di posizione random da inserire nella griglia
+    while(bombPositions.length < 16){
+        let newbomb = parseInt(Math.floor(Math.random() * numBoxes) + 1);
+        //console.log("nuova bomba" + newbomb)
+        if(bombPositions.includes(newbomb) == false){
+            bombPositions.push(newbomb);
+            //console.log("bomba inserita" + newbomb);           
+        }            
+    }
 
-        //al click aggiungo la classe per far diventare il bg della casella azzurro
+    function boxes(numBoxes, classSize){
+        grid.classList.remove("dm_big_box_easy");  //tolgo la dimensione alla griglia scelta
+        grid.classList.remove("dm_big_box_medium"); //tolgo la dimensione della griglia precedente
+        grid.classList.remove("dm_big_box_hard");
+        grid.classList.add(classSize);  //aggiungo la dimensione alla griglia a seconda della difficolà scelta
+        
+        //creo un ciclo per aggiungere le caselle
+        for(let i=1; i<=numBoxes; i++){
+            document.getElementById("dm_grid").innerHTML += `<div class='dm_box dm_${i}'>${i}</div>`;            
+        }
+              
+        /*al click controllo se il numero della casella è all'interno del mio array delle bombe
+        e se lo è la casella diventa di colore rosso, altrimento di colore azzurro*/
         let color = document.getElementsByClassName("dm_box");
+        let lose = false;
         for(let i=0; i<color.length; i++){
             color[i].addEventListener("click", function(){
-            this.classList.add("dm_bg_color");
+                if(!lose){
+                    let mySelect = parseInt(this.innerHTML);  //recupero il valore dal div e lo trasformo in numero
+                    if(bombPositions.includes(mySelect)){  //se l'array include il numero cliccato
+                        for(let j=0; j<bombPositions.length; j++){
+
+                            let bomb = document.getElementsByClassName("dm_"+bombPositions[j]);
+                            console.log(bomb.classList);
+                            bomb.classList.add("dm_bomb");
+                        }                        
+                        lose = true;
+                    }else{
+                        this.classList.add("dm_bg_color");
+                    }
+                }
             });
-        }
+        }  
     }
-    console.log(numBoxes);
+        
+    
     
 });
 
