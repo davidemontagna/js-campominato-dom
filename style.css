@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+body{
+    background-color: black;
+    color: #f8f9fa;
+    height: 100vh;
+    font-family: 'Rubik', sans-serif;
+}
+
+main{
+    height: 85vh;
+}
+
+.dm_difficulty{
+    width: 25%;
+}
+
+.dm_my_btn, .dm_selection{
+    padding: 0px 10px;
+}
+
+.dm_selection{
+    height: 28px;
+}
+
+.dm_big_box_easy{
+    width: 71%;
+}
+
+.dm_big_box_medium{
+    width: 64%;
+}
+
+.dm_big_box_hard{
+    width: 50%;
+}
+
+.dm_box{
+    text-align: center;
+    line-height: 80px;
+    height: 80px;
+    width: 80px;
+    display: inline-block;
+    border: 1px solid rgb(39, 39, 39);
+    transition: 0.3s;
+    background-color: rgb(133, 133, 133);
+}
+
+.dm_box:hover{
+    cursor: pointer;
+}
+
+.dm_foot{
+    line-height: 30px;
+    height: 30px;
+}
+
+.dm_bg_color{
+    background-color: cornflowerblue;
+    color: #000;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow:         inset 0 0 10px #000000;
+}

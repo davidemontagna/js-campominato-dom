@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Campo minato</title>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid justify-content-around">
+                <a class="navbar-brand" href="#">
+                    <img src="img/Logo.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
+                    <span>Campo Minato: la Griglia</span>
+                </a>
+                <div class="d-flex justify-content-around dm_difficulty text-center text-dark">
+                    <div class="d-inline">
+                        <span>Difficoltà:</span>
+                        <select class= "dm_selection" name="" id="mySelect">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                    
+                    <button type="button" id="dm_start" class="btn btn-outline-secondary dm_my_btn">Inizia</button>
+                    <!--<button type="button" id="reset" class="btn btn-outline-secondary dm_my_btn">Reset</button>-->
+
+                </div>
+              
+            </div>
+          </nav>
+    </header>
+
+    <main class="d-flex align-items-center my-3">
+        <div class="container">
+            <div class="row  justify-content-center">
+                <div id="dm_grid" class="flex-wrap">
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <span class="dm_foot">Made with &hearts; by <a href="https://boolean.careers/">Boolean</a></span>
+            </div>
+        </div>
+
+    </footer>
+
+    
+
+    <script src="myscript.js"></script>
+</body>
+</html>
