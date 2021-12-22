@@ -22,8 +22,10 @@ start.addEventListener("click", function(){
     const bombPositions = [];
     let loseText = document.getElementById("dm_lose_txt");
     loseText.classList.add("dm_off");
+    loseText.innerHTML = "";
     let winText = document.getElementById("dm_win_txt");
     winText.classList.add("dm_off");
+    winText.innerHTML = "";
     
         
     /*a seconda del valore inserito genero un tot di caselle e le inserisco
@@ -88,11 +90,17 @@ start.addEventListener("click", function(){
                         //attivo il testo che comunica all'utente di aver perso
                         let loseText = document.getElementById("dm_lose_txt");
                         loseText.classList.remove("dm_off");
-                        loseText.append("Hai effettuato " + countClicks + " click."); //inserisco il testo per comunicare il numero di click                       
+                        //inserisco il testo per comunicare il game over e il numero di click effettuati
+                        loseText.innerHTML += `<h1 class="fs-5">Mi dispiace, hai perso!</h1>
+                                                <span>Hai effettuato ${countClicks} click</span>`;
+                        
                     }else if(countClicks == numBoxes-16){
                         let winText = document.getElementById("dm_win_txt");
                         winText.classList.remove("dm_off");
-                        winText.append("Hai effettuato " + countClicks + " click."); //inserisco il testo per comunicare il numero di click
+                        
+                        //inserisco il testo per comunicare la vittoria e il numero di click effettuati
+                        winText.innerHTML += `<h1 class="fs-5">Complimenti, hai vinto!</h1>
+                                                <span>Hai effettuato ${countClicks} click</span>`; 
                         
                     }else{
                         this.classList.add("dm_bg_color");
